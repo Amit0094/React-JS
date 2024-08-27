@@ -1,0 +1,11 @@
+/* Custom styles for the star */
+.star::before {
+    content: "\2605"; /* Filled star */
+    font-size: 1.5rem; /* Adjust as needed */
+    color: currentColor;
+  }
+  
+  input[type="checkbox"]:checked + div .star::before {
+    content: "\2606"; /* Empty star */
+  }
+  
