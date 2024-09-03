@@ -18,8 +18,10 @@ const Login = () => {
         try {
             const session = await authService.login(data)
             if (session) {
+                console.log('session after user login : LoginData :: ', session)
                 const userData = await authService.getCurrentUser()
                 if (userData) {
+                    console.log('getCurrent user Data after login : userData ::', userData)
                     dispatch(authLogin({ status: true, userData }));
                 }
                 // through navigate you can programmetically navigate user anywhere on application

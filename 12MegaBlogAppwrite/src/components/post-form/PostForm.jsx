@@ -9,7 +9,7 @@ function PostForm({ post }) {
     const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
         defaultValues: {
             title: post?.title || '',
-            slug: post?.slug || '',
+            slug: post?.slug || post?.$id || '',
             content: post?.content || '',
             status: post?.status || 'active',
         }
@@ -22,10 +22,14 @@ function PostForm({ post }) {
     const userData = useSelector(state => state.auth.userData)
 
     const submit = async (data) => {
+        console.log('Data in form : update ::' , data)
         if (post) {
-            const file = data.image[0] ? appwriteService.uploadFile(data.image[0]) : null
+            const file = data.image[0] ? await appwriteService.uploadFile(data.image[0]) : null
+
+            console.log('file uploaded for editing purpose : UPDATE :: ', file)
 
             if (file) {
+                console.log('File Data inside if when post featuredImage is deleting :: ', file)
                 appwriteService.deleteFile(post.featuredImage)
             }
 
@@ -33,6 +37,8 @@ function PostForm({ post }) {
                 ...data,
                 featuredImage: file ? file.$id : undefined
             })
+
+            console.log('After updating the post : dbPost - DATA ::' , dbPost)
 
             if (dbPost) {
                 navigate(`/post/${dbPost.$id}`)

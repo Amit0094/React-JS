@@ -128,6 +128,16 @@ export class Service {
             conf.appwriteBucketId,
             fileId
         )
+
+        // const url = this.bucket.getFilePreview(
+        //     conf.appwriteBucketId,
+        //     fileId
+        // )
+
+        // if(url){
+        //     console.log(`File Preview data : URL :: `, url)
+        //     return url
+        // }
     }
 }
 

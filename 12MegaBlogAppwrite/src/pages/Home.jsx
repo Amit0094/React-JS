@@ -16,10 +16,10 @@ function Home() {
                 .then((post) => {
                     if (post) setPosts(post.documents)
                 })
-        }else setPosts([])
+        } else setPosts([])
     }, [userStatus])
-
-    if (posts.length === 0) {
+    // modified
+    if (posts.length === 0 && userStatus) {
         return (
             <div className='w-full py-8 mt-4 text-center'>
                 <Container>
@@ -27,7 +27,21 @@ function Home() {
                         <div className='p-2 w-full'>
                             <h1
                                 className='text-2xl font-bold hover:text-gray-500'
-                            >Login to read posts</h1>
+                            >No Post Available</h1>
+                        </div>
+                    </div>
+                </Container>
+            </div>
+        )
+    } else if (posts.length === 0 && !userStatus) {
+        return (
+            <div className='w-full py-8 mt-4 text-center'>
+                <Container>
+                    <div className='flex flex-wrap'>
+                        <div className='p-2 w-full'>
+                            <h1
+                                className='text-2xl font-bold hover:text-gray-500'
+                            >Please login to view post</h1>
                         </div>
                     </div>
                 </Container>

@@ -19,6 +19,7 @@ export class AuthService {
 
             if (userAccount) {
                 // call another method
+                console.log(`UserAccount data inside appwrite: createAccount :: ` , userAccount)
                 return this.login({ email, password });
             } else {
                 return userAccount;
